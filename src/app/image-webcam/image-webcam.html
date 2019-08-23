@@ -1,0 +1,12 @@
+<div class="cont d-flex justify-content-center align-items-center flex-column">
+  <div *ngIf="loading">
+    <img class="loading-gif" src="./assets/loading.gif">
+  </div>
+  <video *ngIf="!loading" autoplay playsinline muted id="webcam" width="400" height="400" #video></video>
+
+  <div class="alert result-box" [class.alert-dark]="prediction.probability < 35"
+    [class.alert-success]="prediction.probability >= 35" *ngFor="let prediction of predictions">
+    {{prediction.className}} : <span class="probability-label">{{prediction.probability | number:'2.2-2'}}%</span>
+  </div>
+
+</div>

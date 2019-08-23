@@ -1,0 +1,20 @@
+<div class="cont d-flex justify-content-center align-items-center flex-column">
+  <div class="custom-file w-75">
+    <input type="file" class="custom-file-input" accept="image/*" (change)="onFileChange($event)">
+    <label class="custom-file-label">Choose file</label>
+  </div>
+
+  <div *ngIf="loading; else loaded">
+    <img class="loading-gif" src="./assets/loading.gif">
+  </div>
+
+  <ng-template #loaded>
+    <img id="uploadedImage" [src]="imageSource" #uploadedImage *ngIf="imageSource">
+  </ng-template>
+
+  <div class="alert result-box" [class.alert-dark]="prediction.probability < 35"
+    [class.alert-success]="prediction.probability >= 35" *ngFor="let prediction of predictions">
+    {{prediction.className}} : <span class="probability-label">{{prediction.probability | number:'2.2-2'}}%</span>
+  </div>
+
+</div>
